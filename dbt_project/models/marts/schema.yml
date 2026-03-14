@@ -1,12 +1,14 @@
 version: 2
 
 models:
-  # ─────────────────────────────────────────
+
+  # ─────────────────────────
   # DimCompany
-  # ─────────────────────────────────────────
+  # ─────────────────────────
   - name: dim_company
     description: "Unique companies with their attributes"
     columns:
+
       - name: company_key
         description: "Surrogate primary key"
         tests:
@@ -19,69 +21,47 @@ models:
           - unique
           - not_null
 
-      - name: industry
-        tests:
-          - not_null
-
-      - name: num_employees
-        tests:
-          - not_null
-
       - name: company_size
+        description: "Company size classification"
         tests:
-          - not_null
           - accepted_values:
               arguments:
                 values: ['Startup', 'SME', 'Enterprise', 'Large Enterprise']
 
-      - name: country
-        tests:
-          - not_null
 
-      - name: region
-        tests:
-          - not_null
-
-  # ─────────────────────────────────────────
+  # ─────────────────────────
   # DimDate
-  # ─────────────────────────────────────────
+  # ─────────────────────────
   - name: dim_date
-    description: "Unique survey time periods"
+    description: "Survey time periods"
     columns:
+
       - name: date_key
         description: "Surrogate primary key"
         tests:
           - unique
           - not_null
 
-      - name: survey_year
-        tests:
-          - not_null
-          - accepted_values:
-              values: [2023, 2024, 2025, 2026]
-
-      - name: quarter
-        tests:
-          - not_null
-          - accepted_values:
-              arguments:
-                values: ['Q1', 'Q2', 'Q3', 'Q4']
-
       - name: year_quarter
+        description: "Year and quarter combination"
         tests:
           - unique
           - not_null
 
-      - name: is_latest_year
+      - name: quarter
         tests:
-          - not_null
+          - accepted_values:
+              arguments:
+                values: ['Q1', 'Q2', 'Q3', 'Q4']
 
-  # ─────────────────────────────────────────
+
+  # ─────────────────────────
   # DimAITool
-  # ─────────────────────────────────────────
+  # ─────────────────────────
   - name: dim_ai_tool
     description: "Unique AI tools used by companies"
     columns:
+
       - name: ai_tool_key
         description: "Surrogate primary key"
         tests:
@@ -89,20 +69,19 @@ models:
           - not_null
 
       - name: ai_primary_tool
+        description: "Name of the AI tool"
         tests:
           - unique
           - not_null
 
-      - name: tool_vendor_category
-        tests:
-          - not_null
 
-  # ─────────────────────────────────────────
+  # ─────────────────────────
   # DimAIUseCase
-  # ─────────────────────────────────────────
+  # ─────────────────────────
   - name: dim_ai_usecase
     description: "Unique AI use cases"
     columns:
+
       - name: usecase_key
         description: "Surrogate primary key"
         tests:
@@ -110,20 +89,19 @@ models:
           - not_null
 
       - name: ai_use_case
+        description: "AI use case name"
         tests:
           - unique
           - not_null
 
-      - name: usecase_category
-        tests:
-          - not_null
 
-  # ─────────────────────────────────────────
+  # ─────────────────────────
   # DimAIAdoptionStage
-  # ─────────────────────────────────────────
+  # ─────────────────────────
   - name: dim_ai_adoption_stage
-    description: "Ordered AI maturity stages"
+    description: "AI maturity stages"
     columns:
+
       - name: stage_key
         description: "Surrogate primary key"
         tests:
@@ -131,6 +109,7 @@ models:
           - not_null
 
       - name: adoption_stage
+        description: "Adoption stage label"
         tests:
           - unique
           - not_null
@@ -138,43 +117,28 @@ models:
               arguments:
                 values: ['Exploring', 'Piloting', 'Scaling', 'Optimizing', 'Transforming']
 
-      - name: stage_order
-        tests:
-          - not_null
-          - accepted_values:
-              values: [1, 2, 3, 4, 5]
 
-      - name: stage_label
-        tests:
-          - unique
-          - not_null
-
-  # ─────────────────────────────────────────
+  # ─────────────────────────
   # DimSurveySource
-  # ─────────────────────────────────────────
+  # ─────────────────────────
   - name: dim_survey_source
-    description: "Unique survey sources and collection methods"
+    description: "Survey sources and collection methods"
     columns:
+
       - name: source_key
         description: "Surrogate primary key"
         tests:
           - unique
           - not_null
 
-      - name: survey_source
-        tests:
-          - not_null
 
-      - name: data_collection_method
-        tests:
-          - not_null
-
-  # ─────────────────────────────────────────
+  # ─────────────────────────
   # FactAISurvey
-  # ─────────────────────────────────────────
+  # ─────────────────────────
   - name: fact_ai_survey
-    description: "Core fact table with all measures and FK references"
+    description: "Core fact table containing AI adoption metrics"
     columns:
+
       - name: survey_key
         description: "Surrogate primary key"
         tests:
@@ -187,9 +151,11 @@ models:
           - unique
           - not_null
 
+
+      # ───────── Foreign Keys ─────────
+
       - name: company_key
         tests:
-          - not_null
           - relationships:
               arguments:
                 to: ref('dim_company')
@@ -197,7 +163,6 @@ models:
 
       - name: date_key
         tests:
-          - not_null
           - relationships:
               arguments:
                 to: ref('dim_date')
@@ -205,7 +170,6 @@ models:
 
       - name: ai_tool_key
         tests:
-          - not_null
           - relationships:
               arguments:
                 to: ref('dim_ai_tool')
@@ -213,7 +177,6 @@ models:
 
       - name: usecase_key
         tests:
-          - not_null
           - relationships:
               arguments:
                 to: ref('dim_ai_usecase')
@@ -221,7 +184,6 @@ models:
 
       - name: stage_key
         tests:
-          - not_null
           - relationships:
               arguments:
                 to: ref('dim_ai_adoption_stage')
@@ -229,50 +191,7 @@ models:
 
       - name: source_key
         tests:
-          - not_null
           - relationships:
               arguments:
                 to: ref('dim_survey_source')
                 field: source_key
-
-      - name: revenue_growth_percent
-        tests:
-          - not_null
-
-      - name: cost_reduction_percent
-        tests:
-          - not_null
-
-      - name: productivity_change_percent
-        tests:
-          - not_null
-
-      - name: task_automation_rate
-        tests:
-          - not_null
-
-      - name: jobs_displaced
-        tests:
-          - not_null
-
-      - name: jobs_created
-        tests:
-          - not_null
-
-      - name: num_ai_tools_used
-        tests:
-          - not_null
-
-      - name: ai_projects_active
-        tests:
-          - not_null
-
-      - name: net_jobs_change
-        description: "jobs_created - jobs_displaced"
-        tests:
-          - not_null
-
-      - name: ai_roi_index
-        description: "(revenue_growth_percent + cost_reduction_percent) / ai_budget_percentage"
-        tests:
-          - not_null

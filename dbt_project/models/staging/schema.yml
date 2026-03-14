@@ -1,0 +1,10 @@
+version: 2
+
+sources:
+  - name: ai_adoption_raw
+    database: ai-adoption-pipeline
+    schema: ai_adoption_raw
+    tables:
+      - name: ai_company_adoption
+      - name: ai_industry_summary
+      - name: country_ai_index
