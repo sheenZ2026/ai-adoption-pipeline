@@ -60,7 +60,7 @@ ai-adoption-pipeline/
 ## Dataset
 
 **Global AI Adoption & Workforce Impact Dataset**
-Source: [Kaggle](https://www.kaggle.com/datasets/your-dataset-link)
+Source: [Kaggle](https://www.kaggle.com/datasets/mohankrishnathalla/global-ai-adoption-and-workforce-impact-dataset?resource=download)
 
 | File | Description | Rows |
 |------|-------------|------|
