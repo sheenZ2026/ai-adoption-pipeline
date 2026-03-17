@@ -5,7 +5,7 @@ The raw CSV files are NOT included in this repository due to file size (~40MB).
 ## Dataset
 
 **Global AI Adoption & Workforce Impact Dataset**  
-Source: [Kaggle](https://www.kaggle.com/datasets/YOUR_DATASET_LINK)
+Source: [Kaggle](https://www.kaggle.com/datasets/mohankrishnathalla/global-ai-adoption-and-workforce-impact-dataset?resource=download)
 
 ## Download Instructions
 
