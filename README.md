@@ -231,10 +231,9 @@ jupyter notebook
 - task_automation_rate between 0 and 100
 - jobs_displaced >= 0
 
-📋 **[View Full Data Quality Report](docs/data_quality_summary.md)**
+[🔬 View Notebook](notebooks/data_quality_testing.ipynb)
 
-The full data quality testing notebook is available here:
-[🔬 View Data Quality Notebook](notebooks/data_quality_testing.ipynb)
+The full data quality report is availabe here: 📋 **[View Full Data Quality Report](docs/data_quality_summary.md)**
 
 ---
 
